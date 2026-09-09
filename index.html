@@ -1,28 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>
-        Keerthana A & Lakshman Rao G | Engagement
-    </title>
+    <title>Keerthana A & Lakshman Rao G - Engagement</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
-
 <body>
 
-    <!-- =====================================
-         STARTING PAGE
-         start.png is the complete design
-    ====================================== -->
+    <!-- =========================
+         START PAGE
+    ========================== -->
 
     <section
         class="start-page"
@@ -38,7 +29,6 @@
             class="start-image"
         >
 
-        <!-- Small invisible hint at bottom -->
         <div class="tap-hint">
             Tap to view photos
         </div>
@@ -46,44 +36,39 @@
     </section>
 
 
+    <!-- =========================
+         GALLERY
+    ========================== -->
 
-    <!-- =====================================
-         PHOTO GALLERY
-    ====================================== -->
+    <section class="gallery-section" id="gallery">
 
-    <section
-        class="gallery-section"
-        id="gallery"
-    >
+        <h1 class="gallery-title">
+            Engagement Memories
+        </h1>
 
-        <div class="gallery-header">
-
-            <p class="gallery-small-title">
-                KEERTHANA A & LAKSHMAN RAO G
-            </p>
-
-            <h2>
-                Our Memories
-            </h2>
-
-            <div class="gallery-line">
-                <span>♥</span>
-            </div>
-
-            <p class="gallery-subtitle">
-                Beautiful moments from our engagement
-            </p>
-
-        </div>
+        <p class="gallery-subtitle">
+            Keerthana A & Lakshman Rao G
+        </p>
 
 
-        <!-- Photos are created by JavaScript -->
-
+        <!-- Photos will appear here -->
         <div
             class="photo-grid"
             id="photoGrid"
         ></div>
 
+
+        <!-- =========================
+             PAGE NUMBERS
+        ========================== -->
+
+        <div
+            class="pagination"
+            id="pagination"
+        ></div>
+
+
+        <!-- Back to beginning -->
 
         <div class="back-home">
 
@@ -96,17 +81,14 @@
     </section>
 
 
-
-    <!-- =====================================
+    <!-- =========================
          FULL SCREEN PHOTO VIEWER
-    ====================================== -->
+    ========================== -->
 
     <div
         class="viewer"
         id="viewer"
     >
-
-        <!-- Close -->
 
         <button
             class="close-btn"
@@ -117,8 +99,6 @@
         </button>
 
 
-        <!-- Previous -->
-
         <button
             class="nav-btn previous"
             onclick="previousPhoto()"
@@ -127,8 +107,6 @@
             ‹
         </button>
 
-
-        <!-- Photo -->
 
         <div class="photo-container">
 
@@ -145,11 +123,9 @@
                     id="photoNumber"
                     class="photo-number"
                 >
-                    1 / 5
+                    1 / 12
                 </span>
 
-
-                <!-- REAL DOWNLOAD LINK -->
 
                 <a
                     id="downloadLink"
@@ -166,8 +142,6 @@
         </div>
 
 
-        <!-- Next -->
-
         <button
             class="nav-btn next"
             onclick="nextPhoto()"
@@ -179,9 +153,7 @@
     </div>
 
 
-
     <script src="script.js"></script>
 
 </body>
-
 </html>
