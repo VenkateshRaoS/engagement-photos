@@ -1,28 +1,43 @@
-/* ==========================================
-   YOUR PHOTOS
-========================================== */
+/* =========================
+   ALL PHOTOS
+========================= */
 
 const photos = [
-    "photos/001.jpg",
-    "photos/002.jpg",
-    "photos/003.jpg",
-    "photos/004.jpg",
-    "photos/005.jpg"
+    "photos/001.jpeg",
+    "photos/002.jpeg",
+    "photos/003.jpeg",
+    "photos/004.jpeg",
+    "photos/005.jpeg",
+    "photos/006.jpeg",
+    "photos/007.jpeg",
+    "photos/008.jpeg",
+    "photos/009.jpeg",
+    "photos/010.jpeg",
+    "photos/011.jpeg",
+    "photos/012.jpeg"
 ];
 
+
+/* =========================
+   SETTINGS
+========================= */
+
+const photosPerPage = 12;
+
+let currentPage = 1;
 
 let currentPhoto = 0;
 
 
-/* ==========================================
-   GET HTML ELEMENTS
-========================================== */
-
-const gallery =
-    document.getElementById("gallery");
+/* =========================
+   ELEMENTS
+========================= */
 
 const photoGrid =
     document.getElementById("photoGrid");
+
+const pagination =
+    document.getElementById("pagination");
 
 const viewer =
     document.getElementById("viewer");
@@ -37,12 +52,54 @@ const downloadLink =
     document.getElementById("downloadLink");
 
 
-/* ==========================================
-   CREATE GALLERY
-========================================== */
+/* =========================
+   TOTAL PAGES
+========================= */
 
-photos.forEach(
-    function(photo, index) {
+function getTotalPages() {
+
+    return Math.ceil(
+        photos.length / photosPerPage
+    );
+}
+
+
+/* =========================
+   CREATE GALLERY
+========================= */
+
+function showPage(page) {
+
+    const totalPages = getTotalPages();
+
+    if (page < 1) {
+        page = 1;
+    }
+
+    if (page > totalPages) {
+        page = totalPages;
+    }
+
+    currentPage = page;
+
+    photoGrid.innerHTML = "";
+
+
+    const startIndex =
+        (currentPage - 1) * photosPerPage;
+
+    const endIndex =
+        Math.min(
+            startIndex + photosPerPage,
+            photos.length
+        );
+
+
+    for (
+        let index = startIndex;
+        index < endIndex;
+        index++
+    ) {
 
         const card =
             document.createElement("div");
@@ -50,34 +107,18 @@ photos.forEach(
         card.className =
             "photo-card";
 
-        card.setAttribute(
-            "data-number",
-            index + 1
-        );
-
 
         const image =
             document.createElement("img");
 
-        image.src = photo;
+        image.src =
+            photos[index];
 
         image.alt =
-            "Engagement Photo " +
-            (index + 1);
+            `Engagement photo ${index + 1}`;
 
-
-        /*
-           If an image cannot load,
-           hide that card.
-        */
-
-        image.onerror =
-            function() {
-
-                card.style.display =
-                    "none";
-
-            };
+        image.loading =
+            "lazy";
 
 
         card.appendChild(image);
@@ -85,95 +126,220 @@ photos.forEach(
 
         card.addEventListener(
             "click",
-            function() {
-
+            () => {
                 openPhoto(index);
-
             }
         );
 
 
         photoGrid.appendChild(card);
-
     }
-);
 
 
-/* ==========================================
-   OPEN GALLERY
-========================================== */
+    createPagination();
 
-function openGallery() {
 
-    gallery.scrollIntoView({
+    window.scrollTo({
+        top: document.getElementById("gallery").offsetTop,
         behavior: "smooth"
     });
-
 }
 
 
-/* ==========================================
+/* =========================
+   PAGINATION
+========================= */
+
+function createPagination() {
+
+    pagination.innerHTML = "";
+
+    const totalPages =
+        getTotalPages();
+
+
+    /* Previous button */
+
+    const previousButton =
+        document.createElement("button");
+
+    previousButton.className =
+        "page-arrow";
+
+    previousButton.innerHTML =
+        "‹";
+
+    previousButton.disabled =
+        currentPage === 1;
+
+    previousButton.onclick =
+        () => showPage(currentPage - 1);
+
+    pagination.appendChild(
+        previousButton
+    );
+
+
+    /* Page numbers */
+
+    for (
+        let page = 1;
+        page <= totalPages;
+        page++
+    ) {
+
+        const pageButton =
+            document.createElement("button");
+
+        pageButton.className =
+            "page-btn";
+
+        pageButton.textContent =
+            page;
+
+
+        if (page === currentPage) {
+            pageButton.classList.add(
+                "active"
+            );
+        }
+
+
+        pageButton.onclick =
+            () => showPage(page);
+
+
+        pagination.appendChild(
+            pageButton
+        );
+    }
+
+
+    /* Next button */
+
+    const nextButton =
+        document.createElement("button");
+
+    nextButton.className =
+        "page-arrow";
+
+    nextButton.innerHTML =
+        "›";
+
+    nextButton.disabled =
+        currentPage === totalPages;
+
+    nextButton.onclick =
+        () => showPage(currentPage + 1);
+
+    pagination.appendChild(
+        nextButton
+    );
+}
+
+
+/* =========================
+   OPEN GALLERY
+========================= */
+
+function openGallery() {
+
+    document
+        .getElementById("gallery")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+}
+
+
+/* =========================
    OPEN PHOTO
-========================================== */
+========================= */
 
 function openPhoto(index) {
 
     currentPhoto = index;
 
-    updatePhoto();
+    updateViewer();
 
-    viewer.classList.add("active");
+    viewer.classList.add(
+        "active"
+    );
 
     document.body.style.overflow =
         "hidden";
-
 }
 
 
-/* ==========================================
-   UPDATE PHOTO
-========================================== */
+/* =========================
+   UPDATE VIEWER
+========================= */
 
-function updatePhoto() {
+function updateViewer() {
 
     const photo =
         photos[currentPhoto];
 
 
-    /*
-       Show large image
-    */
-
     largePhoto.src =
         photo;
 
+    largePhoto.alt =
+        `Engagement photo ${currentPhoto + 1}`;
 
-    /*
-       Show photo number
-    */
 
     photoNumber.textContent =
         `${currentPhoto + 1} / ${photos.length}`;
 
 
-    /*
-       IMPORTANT:
-       Set the actual download file.
-    */
-
     downloadLink.href =
         photo;
 
-
     downloadLink.download =
-        `engagement-photo-${currentPhoto + 1}.jpg`;
-
+        `engagement-photo-${currentPhoto + 1}.jpeg`;
 }
 
 
-/* ==========================================
+/* =========================
+   NEXT PHOTO
+========================= */
+
+function nextPhoto() {
+
+    currentPhoto++;
+
+    if (
+        currentPhoto >= photos.length
+    ) {
+
+        currentPhoto = 0;
+    }
+
+    updateViewer();
+}
+
+
+/* =========================
+   PREVIOUS PHOTO
+========================= */
+
+function previousPhoto() {
+
+    currentPhoto--;
+
+    if (currentPhoto < 0) {
+
+        currentPhoto =
+            photos.length - 1;
+    }
+
+    updateViewer();
+}
+
+
+/* =========================
    CLOSE VIEWER
-========================================== */
+========================= */
 
 function closeViewer() {
 
@@ -183,144 +349,82 @@ function closeViewer() {
 
     document.body.style.overflow =
         "";
-
 }
 
 
-/* ==========================================
-   NEXT PHOTO
-========================================== */
-
-function nextPhoto() {
-
-    currentPhoto++;
-
-    if (
-        currentPhoto >=
-        photos.length
-    ) {
-
-        currentPhoto = 0;
-
-    }
-
-    updatePhoto();
-
-}
-
-
-/* ==========================================
-   PREVIOUS PHOTO
-========================================== */
-
-function previousPhoto() {
-
-    currentPhoto--;
-
-    if (
-        currentPhoto < 0
-    ) {
-
-        currentPhoto =
-            photos.length - 1;
-
-    }
-
-    updatePhoto();
-
-}
-
-
-/* ==========================================
-   BACK TO START
-========================================== */
+/* =========================
+   BACK TO BEGINNING
+========================= */
 
 function goToStart() {
 
-    document
-        .getElementById("startPage")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
-
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
 
-/* ==========================================
-   KEYBOARD
-========================================== */
+/* =========================
+   KEYBOARD CONTROLS
+========================= */
 
 document.addEventListener(
     "keydown",
-    function(event) {
+    (event) => {
 
         if (
             !viewer.classList.contains(
                 "active"
             )
         ) {
-
             return;
-
         }
 
 
         if (
-            event.key ===
-            "ArrowRight"
+            event.key === "ArrowRight"
         ) {
-
             nextPhoto();
-
         }
 
 
         if (
-            event.key ===
-            "ArrowLeft"
+            event.key === "ArrowLeft"
         ) {
-
             previousPhoto();
-
         }
 
 
         if (
-            event.key ===
-            "Escape"
+            event.key === "Escape"
         ) {
-
             closeViewer();
-
         }
-
     }
 );
 
 
-/* ==========================================
-   CLICK OUTSIDE PHOTO = CLOSE
-========================================== */
+/* =========================
+   CLOSE OUTSIDE VIEWER
+========================= */
 
 viewer.addEventListener(
     "click",
-    function(event) {
+    (event) => {
 
         if (
             event.target === viewer
         ) {
-
             closeViewer();
-
         }
-
     }
 );
 
 
-/* ==========================================
+/* =========================
    MOBILE SWIPE
-========================================== */
+========================= */
 
 let touchStartX = 0;
 
@@ -329,65 +433,48 @@ let touchEndX = 0;
 
 viewer.addEventListener(
     "touchstart",
-    function(event) {
+    (event) => {
 
         touchStartX =
             event.changedTouches[0]
                 .screenX;
-
-    },
-    {
-        passive: true
     }
 );
 
 
 viewer.addEventListener(
     "touchend",
-    function(event) {
+    (event) => {
 
         touchEndX =
             event.changedTouches[0]
                 .screenX;
 
-        handleSwipe();
 
-    },
-    {
-        passive: true
+        const swipeDistance =
+            touchEndX - touchStartX;
+
+
+        if (
+            Math.abs(swipeDistance) < 50
+        ) {
+            return;
+        }
+
+
+        if (
+            swipeDistance < 0
+        ) {
+            nextPhoto();
+        } else {
+            previousPhoto();
+        }
     }
 );
 
 
-function handleSwipe() {
+/* =========================
+   START GALLERY
+========================= */
 
-    const difference =
-        touchStartX - touchEndX;
-
-
-    /*
-       Ignore very small movements.
-    */
-
-    if (
-        Math.abs(difference) < 50
-    ) {
-
-        return;
-
-    }
-
-
-    if (
-        difference > 0
-    ) {
-
-        nextPhoto();
-
-    } else {
-
-        previousPhoto();
-
-    }
-
-}
+showPage(1);
