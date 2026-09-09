@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Keerthana A & Lakshman Rao G | Engagement
+    </title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+    <!-- =====================================
+         STARTING PAGE
+         start.png is the complete design
+    ====================================== -->
+
+    <section
+        class="start-page"
+        id="startPage"
+        onclick="openGallery()"
+        role="button"
+        aria-label="Open engagement photos"
+    >
+
+        <img
+            src="start.png"
+            alt="Keerthana A and Lakshman Rao G Engagement"
+            class="start-image"
+        >
+
+        <!-- Small invisible hint at bottom -->
+        <div class="tap-hint">
+            Tap to view photos
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         PHOTO GALLERY
+    ====================================== -->
+
+    <section
+        class="gallery-section"
+        id="gallery"
+    >
+
+        <div class="gallery-header">
+
+            <p class="gallery-small-title">
+                KEERTHANA A & LAKSHMAN RAO G
+            </p>
+
+            <h2>
+                Our Memories
+            </h2>
+
+            <div class="gallery-line">
+                <span>♥</span>
+            </div>
+
+            <p class="gallery-subtitle">
+                Beautiful moments from our engagement
+            </p>
+
+        </div>
+
+
+        <!-- Photos are created by JavaScript -->
+
+        <div
+            class="photo-grid"
+            id="photoGrid"
+        ></div>
+
+
+        <div class="back-home">
+
+            <button onclick="goToStart()">
+                ↑ Back to Beginning
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         FULL SCREEN PHOTO VIEWER
+    ====================================== -->
+
+    <div
+        class="viewer"
+        id="viewer"
+    >
+
+        <!-- Close -->
+
+        <button
+            class="close-btn"
+            onclick="closeViewer()"
+            aria-label="Close photo"
+        >
+            ×
+        </button>
+
+
+        <!-- Previous -->
+
+        <button
+            class="nav-btn previous"
+            onclick="previousPhoto()"
+            aria-label="Previous photo"
+        >
+            ‹
+        </button>
+
+
+        <!-- Photo -->
+
+        <div class="photo-container">
+
+            <img
+                id="largePhoto"
+                src=""
+                alt="Engagement photo"
+            >
+
+
+            <div class="photo-info">
+
+                <span
+                    id="photoNumber"
+                    class="photo-number"
+                >
+                    1 / 5
+                </span>
+
+
+                <!-- REAL DOWNLOAD LINK -->
+
+                <a
+                    id="downloadLink"
+                    class="download-btn"
+                    href="#"
+                    download
+                >
+                    <span>⬇</span>
+                    Download Photo
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Next -->
+
+        <button
+            class="nav-btn next"
+            onclick="nextPhoto()"
+            aria-label="Next photo"
+        >
+            ›
+        </button>
+
+    </div>
+
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
