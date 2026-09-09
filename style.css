@@ -11,80 +11,211 @@ html {
 body {
     font-family: Georgia, "Times New Roman", serif;
     background: #f8f1e7;
-    color: #4b3621;
+    color: #5b3b1f;
 }
 
 
-/* =========================
-   START PAGE
-========================= */
+/* =================================
+   FRONT PAGE
+================================= */
 
 .start-page {
     width: 100%;
-    height: 100vh;
-    height: 100svh;
+    min-height: 100vh;
+    min-height: 100svh;
 
-    overflow: hidden;
-
-    cursor: pointer;
-
-    position: relative;
-
-    background: #f8f1e7;
+    background:
+        radial-gradient(
+            circle at center,
+            #fffdf8 0%,
+            #f8f1e7 70%,
+            #eee2cf 100%
+        );
 
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+
+    padding: 25px;
+
+    cursor: pointer;
 }
 
-.start-image {
-    width: 100%;
-    height: 100%;
 
-    object-fit: contain;
+/* =================================
+   INVITATION
+================================= */
+
+.invitation {
+    width: 100%;
+    max-width: 900px;
+
+    text-align: center;
+
+    padding: 35px 35px 30px;
+
+    border: 2px solid #c59a52;
+
+    background: rgba(255, 252, 245, 0.96);
+
+    box-shadow:
+        0 10px 40px rgba(80, 50, 20, 0.18);
+
+    position: relative;
+}
+
+
+/* =================================
+   DECORATIONS
+================================= */
+
+.top-decoration {
+    color: #b68b43;
+
+    font-size: 25px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 10px;
+}
+
+.small-title {
+    font-size: 17px;
+
+    letter-spacing: 7px;
+
+    color: #80613b;
+
+    margin-bottom: 12px;
+}
+
+.invitation h1 {
+    font-size: clamp(38px, 6vw, 68px);
+
+    font-weight: normal;
+
+    font-style: italic;
+
+    color: #71491f;
+
+    line-height: 1.05;
+}
+
+.heart {
+    color: #b38335;
+
+    font-size: 30px;
+
+    margin: 8px 0;
+}
+
+.journey {
+    font-size: 14px;
+
+    letter-spacing: 4px;
+
+    color: #80613b;
+
+    margin: 18px 0 25px;
+}
+
+
+/* =================================
+   COUPLE PHOTO
+================================= */
+
+.couple-photo {
+    width: 100%;
+
+    max-width: 800px;
+
+    margin: 0 auto;
+
+    background: #eee4d5;
+
+    border: 8px solid white;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.18);
+
+    overflow: hidden;
+}
+
+.couple-photo img {
+    width: 100%;
+
+    height: auto;
 
     display: block;
-}
 
-.tap-hint {
-    position: absolute;
+    /*
+       IMPORTANT:
+       The original photo keeps
+       its complete proportions.
+       Nothing is cropped.
+    */
 
-    bottom: 25px;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    background: rgba(255, 255, 255, 0.88);
-
-    color: #6b4b2a;
-
-    padding: 10px 20px;
-
-    border-radius: 25px;
-
-    font-size: 15px;
-
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
-
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-
-    0%,
-    100% {
-        opacity: 0.7;
-    }
-
-    50% {
-        opacity: 1;
-    }
+    object-fit: contain;
 }
 
 
-/* =========================
+/* =================================
+   TAP BUTTON
+================================= */
+
+.tap-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-top: 25px;
+
+    padding: 13px 28px;
+
+    border-radius: 35px;
+
+    background: #40552f;
+
+    color: white;
+
+    border: 2px solid #c59a52;
+
+    font-size: 16px;
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.18);
+}
+
+.tap-button span:first-child {
+    font-size: 23px;
+}
+
+.bottom-decoration {
+    color: #b38335;
+
+    font-size: 25px;
+
+    margin-top: 25px;
+}
+
+.chapter {
+    font-size: 13px;
+
+    letter-spacing: 5px;
+
+    color: #80613b;
+
+    margin-top: 8px;
+}
+
+
+/* =================================
    GALLERY
-========================= */
+================================= */
 
 .gallery-section {
     min-height: 100vh;
@@ -113,9 +244,9 @@ body {
 }
 
 
-/* =========================
+/* =================================
    PHOTO GRID
-========================= */
+================================= */
 
 .photo-grid {
     max-width: 1200px;
@@ -136,7 +267,8 @@ body {
 
     background: white;
 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.12);
 
     cursor: pointer;
 }
@@ -158,9 +290,9 @@ body {
 }
 
 
-/* =========================
+/* =================================
    PAGINATION
-========================= */
+================================= */
 
 .pagination {
     display: flex;
@@ -176,8 +308,9 @@ body {
     flex-wrap: wrap;
 }
 
-.page-btn {
-    min-width: 42px;
+.page-btn,
+.page-arrow {
+    width: 42px;
 
     height: 42px;
 
@@ -192,50 +325,26 @@ body {
     font-size: 15px;
 
     cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.page-btn:hover {
-    background: #eee1ce;
 }
 
 .page-btn.active {
     background: #6b4b2a;
 
     color: white;
-
-    border-color: #6b4b2a;
 }
 
 .page-arrow {
-    min-width: 42px;
-
-    height: 42px;
-
-    border: 1px solid #c7a77b;
-
-    background: white;
-
-    color: #6b4b2a;
-
-    border-radius: 50%;
-
     font-size: 20px;
-
-    cursor: pointer;
 }
 
 .page-arrow:disabled {
     opacity: 0.35;
-
-    cursor: not-allowed;
 }
 
 
-/* =========================
+/* =================================
    BACK BUTTON
-========================= */
+================================= */
 
 .back-home {
     text-align: center;
@@ -260,9 +369,9 @@ body {
 }
 
 
-/* =========================
+/* =================================
    FULL SCREEN VIEWER
-========================= */
+================================= */
 
 .viewer {
     display: none;
@@ -272,6 +381,7 @@ body {
     inset: 0;
 
     width: 100%;
+
     height: 100%;
 
     background: rgba(0, 0, 0, 0.94);
@@ -307,8 +417,6 @@ body {
     max-height: calc(100% - 70px);
 
     object-fit: contain;
-
-    border-radius: 5px;
 }
 
 .photo-info {
@@ -323,8 +431,6 @@ body {
 
 .photo-number {
     color: white;
-
-    font-size: 15px;
 }
 
 .download-btn {
@@ -338,9 +444,9 @@ body {
 
     border-radius: 22px;
 
-    font-size: 14px;
-
     font-family: Arial, sans-serif;
+
+    font-size: 14px;
 }
 
 .close-btn {
@@ -359,8 +465,6 @@ body {
     font-size: 42px;
 
     cursor: pointer;
-
-    z-index: 2;
 }
 
 .nav-btn {
@@ -396,42 +500,103 @@ body {
 }
 
 
-/* =========================
+/* =================================
    MOBILE
-========================= */
+================================= */
 
 @media (max-width: 768px) {
 
     .start-page {
-        height: 100svh;
-
         min-height: 100svh;
 
-        padding: 15px;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
+        padding: 12px;
     }
 
-    .start-image {
-        width: 94%;
+    .invitation {
+        padding: 22px 12px 20px;
 
-        height: 94%;
+        max-height: none;
+    }
+
+    .top-decoration {
+        font-size: 17px;
+
+        letter-spacing: 2px;
+    }
+
+    .small-title {
+        font-size: 11px;
+
+        letter-spacing: 4px;
+    }
+
+    .invitation h1 {
+        font-size: clamp(30px, 9vw, 48px);
+    }
+
+    .heart {
+        font-size: 23px;
+
+        margin: 5px 0;
+    }
+
+    .journey {
+        font-size: 10px;
+
+        letter-spacing: 2px;
+
+        margin: 12px 0 16px;
+    }
+
+
+    /*
+       FULL PHOTO VISIBLE
+       NO CROPPING
+    */
+
+    .couple-photo {
+        width: 100%;
+
+        border-width: 5px;
+    }
+
+    .couple-photo img {
+        width: 100%;
+
+        height: auto;
 
         object-fit: contain;
     }
 
-    .tap-hint {
-        bottom: 12px;
+
+    .tap-button {
+        margin-top: 15px;
+
+        padding: 10px 17px;
 
         font-size: 12px;
 
-        padding: 7px 14px;
+        gap: 7px;
     }
 
+    .tap-button span:first-child {
+        font-size: 18px;
+    }
+
+    .bottom-decoration {
+        font-size: 20px;
+
+        margin-top: 15px;
+    }
+
+    .chapter {
+        font-size: 9px;
+
+        letter-spacing: 3px;
+    }
+
+
+    /* Gallery */
 
     .gallery-section {
         padding: 25px 12px;
@@ -440,13 +605,6 @@ body {
     .gallery-title {
         font-size: 26px;
     }
-
-    .gallery-subtitle {
-        font-size: 14px;
-
-        margin-bottom: 22px;
-    }
-
 
     .photo-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -469,11 +627,9 @@ body {
 
     .page-btn,
     .page-arrow {
-        min-width: 38px;
+        width: 38px;
 
         height: 38px;
-
-        font-size: 14px;
     }
 
 
@@ -483,12 +639,6 @@ body {
         width: 96%;
 
         height: 88%;
-    }
-
-    .photo-container img {
-        max-width: 100%;
-
-        max-height: calc(100% - 60px);
     }
 
     .nav-btn {
@@ -522,37 +672,48 @@ body {
     .download-btn {
         padding: 8px 12px;
 
-        font-size: 13px;
+        font-size: 12px;
     }
 }
 
 
-/* =========================
+/* =================================
    SMALL PHONES
-========================= */
+================================= */
 
 @media (max-width: 400px) {
 
     .start-page {
-        padding: 20px;
+        padding: 8px;
     }
 
-    .start-image {
-        width: 90%;
+    .invitation {
+        padding: 18px 8px;
+    }
 
-        height: 90%;
+    .small-title {
+        font-size: 9px;
 
-        object-fit: contain;
+        letter-spacing: 3px;
+    }
+
+    .journey {
+        font-size: 8px;
+
+        letter-spacing: 1.5px;
+    }
+
+    .tap-button {
+        font-size: 11px;
+
+        padding: 9px 13px;
+    }
+
+    .photo-grid {
+        grid-template-columns: 1fr;
     }
 
     .photo-card img {
         height: 240px;
-    }
-
-    .page-btn,
-    .page-arrow {
-        min-width: 36px;
-
-        height: 36px;
     }
 }
