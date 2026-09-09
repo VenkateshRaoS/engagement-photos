@@ -12,25 +12,66 @@
 <body>
 
     <!-- =========================
-         START PAGE
+         FRONT PAGE
     ========================== -->
 
     <section
         class="start-page"
         id="startPage"
         onclick="openGallery()"
-        role="button"
-        aria-label="Open engagement photos"
     >
 
-        <img
-            src="start.png"
-            alt="Keerthana A and Lakshman Rao G Engagement"
-            class="start-image"
-        >
+        <div class="invitation">
 
-        <div class="tap-hint">
-            Tap to view photos
+            <div class="top-decoration">
+                ❀　❁　✿　❁　❀
+            </div>
+
+            <p class="small-title">
+                OUR ENGAGEMENT
+            </p>
+
+            <h1>
+                Keerthana A
+            </h1>
+
+            <div class="heart">
+                ♥
+            </div>
+
+            <h1>
+                Lakshman Rao G
+            </h1>
+
+            <p class="journey">
+                TWO HEARTS · ONE BEAUTIFUL JOURNEY
+            </p>
+
+
+            <!-- YOUR ACTUAL PHOTO -->
+
+            <div class="couple-photo">
+                <img
+                    src="photos/001.jpeg"
+                    alt="Keerthana A and Lakshman Rao G"
+                >
+            </div>
+
+
+            <div class="tap-button">
+                <span>☝</span>
+                <span>Tap anywhere to view photos</span>
+            </div>
+
+
+            <div class="bottom-decoration">
+                ♥
+            </div>
+
+            <p class="chapter">
+                A NEW CHAPTER BEGINS
+            </p>
+
         </div>
 
     </section>
@@ -40,35 +81,31 @@
          GALLERY
     ========================== -->
 
-    <section class="gallery-section" id="gallery">
+    <section
+        class="gallery-section"
+        id="gallery"
+    >
 
-        <h1 class="gallery-title">
+        <h2 class="gallery-title">
             Engagement Memories
-        </h1>
+        </h2>
 
         <p class="gallery-subtitle">
             Keerthana A & Lakshman Rao G
         </p>
 
 
-        <!-- Photos will appear here -->
         <div
             class="photo-grid"
             id="photoGrid"
         ></div>
 
 
-        <!-- =========================
-             PAGE NUMBERS
-        ========================== -->
-
         <div
             class="pagination"
             id="pagination"
         ></div>
 
-
-        <!-- Back to beginning -->
 
         <div class="back-home">
 
@@ -82,7 +119,7 @@
 
 
     <!-- =========================
-         FULL SCREEN PHOTO VIEWER
+         FULL SCREEN VIEWER
     ========================== -->
 
     <div
@@ -93,7 +130,6 @@
         <button
             class="close-btn"
             onclick="closeViewer()"
-            aria-label="Close photo"
         >
             ×
         </button>
@@ -102,7 +138,6 @@
         <button
             class="nav-btn previous"
             onclick="previousPhoto()"
-            aria-label="Previous photo"
         >
             ‹
         </button>
@@ -116,7 +151,6 @@
                 alt="Engagement photo"
             >
 
-
             <div class="photo-info">
 
                 <span
@@ -126,15 +160,13 @@
                     1 / 12
                 </span>
 
-
                 <a
                     id="downloadLink"
                     class="download-btn"
                     href="#"
                     download
                 >
-                    <span>⬇</span>
-                    Download Photo
+                    ⬇ Download Photo
                 </a>
 
             </div>
@@ -145,7 +177,6 @@
         <button
             class="nav-btn next"
             onclick="nextPhoto()"
-            aria-label="Next photo"
         >
             ›
         </button>
