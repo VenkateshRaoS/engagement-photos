@@ -806,6 +806,8 @@
     ========================== */
 
     .view-photos-btn {
+      position: relative;
+      z-index: 3;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -822,6 +824,8 @@
       text-transform: uppercase;
       backdrop-filter: blur(10px);
       transition: .3s ease;
+      cursor: pointer;
+      text-decoration: none;
     }
 
     .view-photos-btn:hover {
@@ -1557,12 +1561,12 @@
           With love ♥
         </div>
 
-        <a class="view-photos-btn" href="photos.html">
-          <span>▣</span>
-          View Photos
-        </a>
-
       </div>
+
+      <a class="view-photos-btn" href="photos.html" aria-label="View all engagement photos">
+        <span>▣</span>
+        View Photos
+      </a>
 
     </section>
 
