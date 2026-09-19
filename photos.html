@@ -21,23 +21,318 @@ footer{text-align:center;background:#310d1b;color:#ead8de;padding:28px 18px;font
 </style>
 </head>
 <body>
-<nav class="nav" id="nav"><a class="brand" href="index.html">L ♥ K</a><div class="nav-links"><a href="index.html#story">Our Story</a><a href="index.html#gallery">Moments</a><a href="index.html#memories">Memories</a><a href="photos.html">Photos</a><a href="index.html#wedding">Wedding</a></div><button class="menu" id="menu" aria-label="Open menu">☰</button></nav>
-<header class="hero"><div class="kicker">Captured with love · Engagement</div><h1>All Our Photos</h1><p>A special collection of engagement memories. Tap any photo to view it full screen.</p></header>
-<main class="gallery-wrap"><div class="gallery" id="gallery"></div><div class="pagination" id="pagination"></div></main>
-<footer><strong>Lakshman ♥ Keerthana</strong><br><span>Engagement memories · Made with love</span></footer>
-<div class="lightbox" id="lightbox" aria-hidden="true"><button class="close" id="close" aria-label="Close">×</button><button class="lb-prev" id="prev" aria-label="Previous">‹</button><img id="lbImage" src="" alt=""><button class="lb-next" id="next" aria-label="Next">›</button><a class="download" id="download" href="#" download>Download Photo</a></div>
+
+<nav class="nav" id="nav">
+  <a class="brand" href="index.html">L ♥ K</a>
+  <div class="nav-links">
+    <a href="index.html#story">Our Story</a>
+    <a href="index.html#gallery">Moments</a>
+    <a href="index.html#memories">Memories</a>
+    <a href="photos.html">Photos</a>
+    <a href="index.html#wedding">Wedding</a>
+  </div>
+  <button class="menu" id="menu" aria-label="Open menu">☰</button>
+</nav>
+
+<header class="hero">
+  <div class="kicker">Captured with love · Engagement</div>
+  <h1>All Our Photos</h1>
+  <p>A special collection of engagement memories. Tap any photo to view it full screen.</p>
+</header>
+
+<main class="gallery-wrap">
+  <div class="gallery" id="gallery"></div>
+  <div class="pagination" id="pagination"></div>
+</main>
+
+<footer>
+  <strong>Lakshman ♥ Keerthana</strong><br>
+  <span>Engagement memories · Made with love</span>
+</footer>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="close" id="close" aria-label="Close">×</button>
+  <button class="lb-prev" id="prev" aria-label="Previous">‹</button>
+  <img id="lbImage" src="" alt="">
+  <button class="lb-next" id="next" aria-label="Next">›</button>
+  <a class="download" id="download" href="#" download>Download Photo</a>
+</div>
+
 <script>
-const photoFiles=[
-'images/family-portrait.jpeg','images/garland-moment.jpeg','images/close-embrace.jpeg','images/proposal-moment.jpeg','images/smiling-together.jpeg','images/forehead-kiss.jpeg','images/classic-portrait.jpeg','images/together-traditional.jpeg','images/family-celebration.jpeg','images/couple-portrait.jpeg','images/groom-portrait.jpeg','images/engagement-stage.jpeg'
-];
-const perPage=9;let page=1;let current=0;
-const gallery=document.getElementById('gallery'),pagination=document.getElementById('pagination'),lightbox=document.getElementById('lightbox'),lbImage=document.getElementById('lbImage'),download=document.getElementById('download');
-function render(){const total=Math.ceil(photoFiles.length/perPage);if(page>total)page=total||1;gallery.innerHTML='';const start=(page-1)*perPage;photoFiles.slice(start,start+perPage).forEach((src,i)=>{const n=start+i+1;const div=document.createElement('div');div.className='photo';div.innerHTML=`<img src="${src}" alt="Engagement photo ${n}" loading="lazy"><span class="photo-number">${n}</span>`;div.onclick=()=>openBox(n-1);gallery.appendChild(div)});pagination.innerHTML='';const prev=document.createElement('button');prev.textContent='‹';prev.disabled=page===1;prev.onclick=()=>{page--;render();scrollTo({top:gallery.offsetTop-90,behavior:'smooth'})};pagination.appendChild(prev);for(let i=1;i<=total;i++){const b=document.createElement('button');b.textContent=i;b.className=i===page?'active':'';b.onclick=()=>{page=i;render();scrollTo({top:gallery.offsetTop-90,behavior:'smooth'})};pagination.appendChild(b)}const next=document.createElement('button');next.textContent='›';next.disabled=page===total;next.onclick=()=>{page++;render();scrollTo({top:gallery.offsetTop-90,behavior:'smooth'})};pagination.appendChild(next)}
-function openBox(i){current=(i+photoFiles.length)%photoFiles.length;lbImage.src=photoFiles[current];lbImage.alt='Engagement photo '+(current+1);download.href=photoFiles[current];download.download=photoFiles[current].split('/').pop();lightbox.classList.add('open');lightbox.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}
-function closeBox(){lightbox.classList.remove('open');lightbox.setAttribute('aria-hidden','true');document.body.style.overflow=''}
-document.getElementById('close').onclick=closeBox;document.getElementById('prev').onclick=()=>openBox(current-1);document.getElementById('next').onclick=()=>openBox(current+1);lightbox.onclick=e=>{if(e.target===lightbox)closeBox()};document.addEventListener('keydown',e=>{if(!lightbox.classList.contains('open'))return;if(e.key==='Escape')closeBox();if(e.key==='ArrowLeft')openBox(current-1);if(e.key==='ArrowRight')openBox(current+1)});
-const menu=document.getElementById('menu'),nav=document.getElementById('nav');menu.onclick=()=>nav.classList.toggle('open');document.querySelectorAll('.nav-links a').forEach(a=>a.onclick=()=>nav.classList.remove('open'));
+
+/* =========================================================
+   PHOTOS 013 TO 326
+   ========================================================= */
+
+const photoFiles = Array.from(
+  { length: 314 },
+  (_, i) => `images/${String(i + 13).padStart(3, '0')}.jpg`
+);
+
+
+/* =========================================================
+   GALLERY
+   ========================================================= */
+
+const perPage = 9;
+let page = 1;
+let current = 0;
+
+const gallery = document.getElementById('gallery');
+const pagination = document.getElementById('pagination');
+const lightbox = document.getElementById('lightbox');
+const lbImage = document.getElementById('lbImage');
+const download = document.getElementById('download');
+
+
+function render() {
+
+  const total = Math.ceil(photoFiles.length / perPage);
+
+  if (page > total) {
+    page = total || 1;
+  }
+
+  gallery.innerHTML = '';
+
+  const start = (page - 1) * perPage;
+
+  photoFiles
+    .slice(start, start + perPage)
+    .forEach((src, i) => {
+
+      const n = start + i + 1;
+
+      const div = document.createElement('div');
+
+      div.className = 'photo';
+
+      div.innerHTML = `
+        <img
+          src="${src}"
+          alt="Engagement photo ${n}"
+          loading="lazy"
+        >
+        <span class="photo-number">${n}</span>
+      `;
+
+      div.onclick = () => openBox(n - 1);
+
+      gallery.appendChild(div);
+
+    });
+
+
+  /* =========================================================
+     PAGINATION
+     ========================================================= */
+
+  pagination.innerHTML = '';
+
+  const prev = document.createElement('button');
+
+  prev.textContent = '‹';
+
+  prev.disabled = page === 1;
+
+  prev.onclick = () => {
+
+    page--;
+
+    render();
+
+    scrollTo({
+      top: gallery.offsetTop - 90,
+      behavior: 'smooth'
+    });
+
+  };
+
+  pagination.appendChild(prev);
+
+
+  for (let i = 1; i <= total; i++) {
+
+    const b = document.createElement('button');
+
+    b.textContent = i;
+
+    b.className = i === page ? 'active' : '';
+
+    b.onclick = () => {
+
+      page = i;
+
+      render();
+
+      scrollTo({
+        top: gallery.offsetTop - 90,
+        behavior: 'smooth'
+      });
+
+    };
+
+    pagination.appendChild(b);
+
+  }
+
+
+  const next = document.createElement('button');
+
+  next.textContent = '›';
+
+  next.disabled = page === total;
+
+  next.onclick = () => {
+
+    page++;
+
+    render();
+
+    scrollTo({
+      top: gallery.offsetTop - 90,
+      behavior: 'smooth'
+    });
+
+  };
+
+  pagination.appendChild(next);
+
+}
+
+
+/* =========================================================
+   FULL SCREEN PHOTO
+   ========================================================= */
+
+function openBox(i) {
+
+  current =
+    (i + photoFiles.length) %
+    photoFiles.length;
+
+  lbImage.src =
+    photoFiles[current];
+
+  lbImage.alt =
+    'Engagement photo ' + (current + 1);
+
+  download.href =
+    photoFiles[current];
+
+  download.download =
+    photoFiles[current]
+      .split('/')
+      .pop();
+
+  lightbox.classList.add('open');
+
+  lightbox.setAttribute(
+    'aria-hidden',
+    'false'
+  );
+
+  document.body.style.overflow =
+    'hidden';
+
+}
+
+
+function closeBox() {
+
+  lightbox.classList.remove('open');
+
+  lightbox.setAttribute(
+    'aria-hidden',
+    'true'
+  );
+
+  document.body.style.overflow =
+    '';
+
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+document.getElementById('close').onclick =
+  closeBox;
+
+
+document.getElementById('prev').onclick =
+  () => openBox(current - 1);
+
+
+document.getElementById('next').onclick =
+  () => openBox(current + 1);
+
+
+lightbox.onclick = e => {
+
+  if (e.target === lightbox) {
+    closeBox();
+  }
+
+};
+
+
+/* =========================================================
+   KEYBOARD
+   ========================================================= */
+
+document.addEventListener('keydown', e => {
+
+  if (!lightbox.classList.contains('open')) {
+    return;
+  }
+
+  if (e.key === 'Escape') {
+    closeBox();
+  }
+
+  if (e.key === 'ArrowLeft') {
+    openBox(current - 1);
+  }
+
+  if (e.key === 'ArrowRight') {
+    openBox(current + 1);
+  }
+
+});
+
+
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
+const menu =
+  document.getElementById('menu');
+
+const nav =
+  document.getElementById('nav');
+
+
+menu.onclick = () =>
+  nav.classList.toggle('open');
+
+
+document
+  .querySelectorAll('.nav-links a')
+  .forEach(a =>
+    a.onclick = () =>
+      nav.classList.remove('open')
+  );
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
 render();
+
 </script>
+
 </body>
 </html>
