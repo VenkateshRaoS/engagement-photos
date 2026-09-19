@@ -2,333 +2,1077 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#7b1e35">
-<title>Photos | Lakshman ♥ Keerthana</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
-:root{--wine:#741d34;--wine-dark:#4b1123;--rose:#b85c70;--cream:#fffaf6;--paper:#fffdfb;--gold:#c79b58;--ink:#30252a;--muted:#756b70;--line:rgba(116,29,52,.13)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.6}a{color:inherit;text-decoration:none}button{font:inherit}
-.nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:16px clamp(18px,5vw,72px);background:rgba(255,253,251,.94);backdrop-filter:blur(18px);color:var(--wine);box-shadow:0 8px 30px rgba(0,0,0,.07)}
-.brand{font-family:"Cormorant Garamond",serif;font-size:25px;font-weight:700;letter-spacing:.03em}.nav-links{display:flex;gap:26px;font-size:13px;font-weight:600;letter-spacing:.05em}.nav-links a:hover{color:var(--gold)}.menu{display:none;border:0;background:transparent;color:inherit;font-size:25px}
-.hero{padding:92px 18px 65px;text-align:center;background:linear-gradient(135deg,#4b1123,#741d34);color:#fff}.kicker{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#f3c9d1;font-weight:700}.hero h1{font-family:"Cormorant Garamond",serif;font-size:clamp(52px,8vw,88px);line-height:.95;margin:12px 0}.hero p{margin:16px auto 0;max-width:620px;color:#f8e6eb;font-size:15px}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-.gallery-wrap{max-width:1180px;margin:auto;padding:70px clamp(18px,5vw,60px)}.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.photo{position:relative;aspect-ratio:1/1;overflow:hidden;border-radius:18px;background:#eee;cursor:pointer;box-shadow:0 12px 35px rgba(57,20,32,.10)}.photo img{width:100%;height:100%;object-fit:cover;transition:transform .45s ease}.photo:hover img{transform:scale(1.045)}.photo-number{position:absolute;left:12px;top:12px;background:rgba(255,255,255,.9);color:var(--wine);padding:5px 9px;border-radius:99px;font-size:10px;font-weight:600}
-.pagination{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:42px;flex-wrap:wrap}.pagination button{min-width:42px;height:42px;border:1px solid var(--line);background:#fff;color:var(--wine);border-radius:12px;cursor:pointer;font-weight:600}.pagination button:hover,.pagination button.active{background:var(--wine);color:#fff}.pagination button:disabled{opacity:.35;cursor:not-allowed}
-footer{text-align:center;background:#310d1b;color:#ead8de;padding:28px 18px;font-size:11px;letter-spacing:.08em}footer strong{color:#fff;font-family:"Cormorant Garamond",serif;font-size:18px;letter-spacing:0}
-.lightbox{position:fixed;inset:0;z-index:50;background:rgba(12,7,10,.94);display:none;place-items:center;padding:20px}.lightbox.open{display:grid}.lightbox img{max-width:min(1100px,94vw);max-height:88vh;object-fit:contain;border-radius:12px}.close,.lb-prev,.lb-next,.download{position:absolute;border:0;background:rgba(255,255,255,.13);color:#fff;cursor:pointer}.close{top:18px;right:22px;border-radius:50%;width:44px;height:44px;font-size:27px}.lb-prev,.lb-next{top:50%;transform:translateY(-50%);border-radius:50%;width:48px;height:48px;font-size:28px}.lb-prev{left:20px}.lb-next{right:20px}.download{bottom:22px;left:50%;transform:translateX(-50%);padding:11px 18px;border-radius:99px;background:#fff;color:var(--wine);font-weight:600}
-@media(max-width:760px){nav{padding:13px 18px}.brand{font-size:22px}.nav-links{display:none}.menu{display:block}.nav.open .nav-links{display:flex;position:absolute;top:58px;left:12px;right:12px;flex-direction:column;gap:0;background:rgba(255,253,251,.98);color:var(--wine);border-radius:18px;padding:8px;box-shadow:0 18px 45px rgba(0,0,0,.15)}.nav.open .nav-links a{padding:13px 15px;border-radius:12px}.hero{padding:72px 18px 50px}.gallery-wrap{padding:45px 14px}.gallery{grid-template-columns:repeat(2,1fr);gap:10px}.photo{border-radius:12px}.photo-number{left:8px;top:8px;font-size:9px;padding:4px 7px}.lb-prev{left:8px}.lb-next{right:8px}.lightbox{padding:10px}.lightbox img{max-width:98vw;max-height:82vh}.download{bottom:16px}}
+<title>Photos | Lakshman ♥ Keerthana</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Georgia, 'Times New Roman', serif;
+    background:#fff;
+    color:#3a2330;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(255,255,255,0.97);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid #eee;
+    padding:18px 6%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.brand{
+    text-decoration:none;
+    color:#53152f;
+    font-size:26px;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.nav-links{
+    display:flex;
+    gap:28px;
+    align-items:center;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#4a3040;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    color:#8d3158;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.photos-hero{
+    text-align:center;
+    padding:90px 20px 65px;
+    background:
+        radial-gradient(circle at top,#fff4f7 0%,#fff 55%);
+}
+
+.photos-hero .small-title{
+    text-transform:uppercase;
+    letter-spacing:4px;
+    font-size:12px;
+    color:#9a496b;
+    margin-bottom:18px;
+}
+
+.photos-hero h1{
+    font-size:52px;
+    color:#5a1833;
+    margin-bottom:18px;
+}
+
+.photos-hero p{
+    max-width:650px;
+    margin:auto;
+    color:#765968;
+    font-size:17px;
+    line-height:1.8;
+}
+
+/* =========================
+   GALLERY
+========================= */
+
+.gallery-section{
+    max-width:1250px;
+    margin:auto;
+    padding:30px 5% 80px;
+}
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.photo-card{
+    position:relative;
+    overflow:hidden;
+    border-radius:16px;
+    background:#f8f1f4;
+    cursor:pointer;
+    aspect-ratio:4/3;
+    box-shadow:0 8px 25px rgba(80,30,50,0.08);
+}
+
+.photo-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform 0.5s ease;
+}
+
+.photo-card:hover img{
+    transform:scale(1.06);
+}
+
+.photo-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        to top,
+        rgba(50,15,30,0.15),
+        transparent 45%
+    );
+    pointer-events:none;
+}
+
+/* =========================
+   PAGINATION
+========================= */
+
+.pagination{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    margin-top:55px;
+    flex-wrap:wrap;
+}
+
+.page-btn,
+.prev-next{
+    border:none;
+    background:transparent;
+    color:#5d4050;
+    min-width:42px;
+    height:42px;
+    border-radius:12px;
+    font-family:inherit;
+    font-size:15px;
+    cursor:pointer;
+    transition:all 0.25s ease;
+}
+
+.page-btn:hover,
+.prev-next:hover{
+    background:#f6e7ed;
+    color:#7c2349;
+}
+
+.page-btn.active{
+    background:#8b3157;
+    color:white;
+    box-shadow:0 5px 15px rgba(139,49,87,0.25);
+}
+
+.prev-next{
+    padding:0 14px;
+    min-width:auto;
+    font-weight:bold;
+}
+
+.prev-next:disabled{
+    opacity:0.35;
+    cursor:not-allowed;
+    background:transparent;
+}
+
+.ellipsis{
+    color:#8d7480;
+    padding:0 3px;
+}
+
+/* =========================
+   LIGHTBOX
+========================= */
+
+.lightbox{
+    position:fixed;
+    inset:0;
+    z-index:3000;
+    background:rgba(20,8,14,0.94);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:30px;
+}
+
+.lightbox.show{
+    display:flex;
+}
+
+.lightbox-image{
+    max-width:90vw;
+    max-height:84vh;
+    object-fit:contain;
+    border-radius:8px;
+    box-shadow:0 15px 60px rgba(0,0,0,0.5);
+}
+
+.close-btn{
+    position:absolute;
+    top:22px;
+    right:28px;
+    width:48px;
+    height:48px;
+    border:none;
+    border-radius:50%;
+    background:rgba(255,255,255,0.12);
+    color:white;
+    font-size:30px;
+    cursor:pointer;
+    z-index:10;
+}
+
+.close-btn:hover{
+    background:rgba(255,255,255,0.22);
+}
+
+.lightbox-nav{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:55px;
+    height:55px;
+    border:none;
+    border-radius:50%;
+    background:rgba(255,255,255,0.14);
+    color:white;
+    font-size:30px;
+    cursor:pointer;
+    z-index:10;
+}
+
+.lightbox-nav:hover{
+    background:rgba(255,255,255,0.25);
+}
+
+.lightbox-prev{
+    left:25px;
+}
+
+.lightbox-next{
+    right:25px;
+}
+
+.download-btn{
+    position:absolute;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%);
+    text-decoration:none;
+    color:white;
+    background:#8b3157;
+    padding:13px 24px;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.download-btn:hover{
+    background:#a3446b;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:#64183e;
+    color:white;
+    text-align:center;
+    padding:38px 20px;
+}
+
+footer h3{
+    font-size:18px;
+    margin-bottom:8px;
+}
+
+footer p{
+    font-size:13px;
+    opacity:0.9;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+    .nav-links{
+        gap:15px;
+    }
+
+    .nav-links a{
+        font-size:12px;
+    }
+
+    .photos-hero h1{
+        font-size:40px;
+    }
+
+    .gallery{
+        grid-template-columns:repeat(2,1fr);
+        gap:15px;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .navbar{
+        padding:15px 18px;
+    }
+
+    .brand{
+        font-size:22px;
+    }
+
+    .nav-links{
+        gap:10px;
+        overflow-x:auto;
+        white-space:nowrap;
+        max-width:75%;
+    }
+
+    .nav-links a{
+        font-size:11px;
+    }
+
+    .photos-hero{
+        padding:65px 20px 45px;
+    }
+
+    .photos-hero h1{
+        font-size:34px;
+    }
+
+    .photos-hero p{
+        font-size:14px;
+    }
+
+    .gallery-section{
+        padding:20px 15px 60px;
+    }
+
+    .gallery{
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+    }
+
+    .photo-card{
+        border-radius:11px;
+    }
+
+    .pagination{
+        gap:5px;
+        margin-top:40px;
+    }
+
+    .page-btn,
+    .prev-next{
+        min-width:38px;
+        height:38px;
+        font-size:13px;
+    }
+
+    .prev-next{
+        padding:0 10px;
+    }
+
+    .lightbox{
+        padding:15px;
+    }
+
+    .lightbox-image{
+        max-width:95vw;
+        max-height:80vh;
+    }
+
+    .lightbox-prev{
+        left:10px;
+    }
+
+    .lightbox-next{
+        right:10px;
+    }
+
+}
+
 </style>
 </head>
+
 <body>
 
-<nav class="nav" id="nav">
-  <a class="brand" href="index.html">L ♥ K</a>
-  <div class="nav-links">
-    <a href="index.html#story">Our Story</a>
-    <a href="index.html#gallery">Moments</a>
-    <a href="index.html#memories">Memories</a>
-    <a href="photos.html">Photos</a>
-    <a href="index.html#wedding">Wedding</a>
-  </div>
-  <button class="menu" id="menu" aria-label="Open menu">☰</button>
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+    <a href="index.html" class="brand">
+        L ♥ K
+    </a>
+
+    <div class="nav-links">
+
+        <a href="index.html#story">
+            Our Story
+        </a>
+
+        <a href="index.html#gallery">
+            Moments
+        </a>
+
+        <a href="index.html#memories">
+            Memories
+        </a>
+
+        <a href="photos.html">
+            Photos
+        </a>
+
+        <a href="index.html#wedding">
+            Wedding
+        </a>
+
+    </div>
+
 </nav>
 
-<header class="hero">
-  <div class="kicker">Captured with love · Engagement</div>
-  <h1>All Our Photos</h1>
-  <p>A special collection of engagement memories. Tap any photo to view it full screen.</p>
-</header>
 
-<main class="gallery-wrap">
-  <div class="gallery" id="gallery"></div>
-  <div class="pagination" id="pagination"></div>
-</main>
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="photos-hero">
+
+    <div class="small-title">
+        Lakshman ♥ Keerthana
+    </div>
+
+    <h1>
+        All Our Photos
+    </h1>
+
+    <p>
+        A collection of beautiful moments, memories and celebrations.
+        Tap any photo to view it in full screen.
+    </p>
+
+</section>
+
+
+<!-- =========================
+     GALLERY
+========================= -->
+
+<section class="gallery-section">
+
+    <div class="gallery" id="gallery"></div>
+
+    <!-- PAGINATION -->
+    <div class="pagination" id="pagination"></div>
+
+</section>
+
+
+<!-- =========================
+     LIGHTBOX
+========================= -->
+
+<div class="lightbox" id="lightbox">
+
+    <button class="close-btn" id="closeBtn">
+        ×
+    </button>
+
+    <button class="lightbox-nav lightbox-prev" id="prevBtn">
+        ‹
+    </button>
+
+    <img
+        id="lightboxImage"
+        class="lightbox-image"
+        src=""
+        alt="Engagement photo"
+    >
+
+    <button class="lightbox-nav lightbox-next" id="nextBtn">
+        ›
+    </button>
+
+    <a
+        id="downloadBtn"
+        class="download-btn"
+        href=""
+        download
+    >
+        Download Photo
+    </a>
+
+</div>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
-  <strong>Lakshman ♥ Keerthana</strong><br>
-  <span>Engagement memories · Made with love</span>
+
+    <h3>
+        Lakshman ♥ Keerthana
+    </h3>
+
+    <p>
+        Engagement memories · Made with love
+    </p>
+
 </footer>
 
-<div class="lightbox" id="lightbox" aria-hidden="true">
-  <button class="close" id="close" aria-label="Close">×</button>
-  <button class="lb-prev" id="prev" aria-label="Previous">‹</button>
-  <img id="lbImage" src="" alt="">
-  <button class="lb-next" id="next" aria-label="Next">›</button>
-  <a class="download" id="download" href="#" download>Download Photo</a>
-</div>
 
 <script>
 
-/* =========================================================
-   PHOTOS 013 TO 326
-   ========================================================= */
+/* ==========================================
+   PHOTOS 013.jpg → 326.jpg
+========================================== */
 
 const photoFiles = Array.from(
-  { length: 314 },
-  (_, i) => `images/${String(i + 13).padStart(3, '0')}.jpg`
+    { length: 314 },
+    (_, i) => `images/${String(i + 13).padStart(3, '0')}.jpg`
 );
 
 
-/* =========================================================
-   GALLERY
-   ========================================================= */
+/* ==========================================
+   SETTINGS
+========================================== */
 
 const perPage = 9;
-let page = 1;
-let current = 0;
 
-const gallery = document.getElementById('gallery');
-const pagination = document.getElementById('pagination');
-const lightbox = document.getElementById('lightbox');
-const lbImage = document.getElementById('lbImage');
-const download = document.getElementById('download');
+let currentPage = 1;
+
+const totalPages = Math.ceil(photoFiles.length / perPage);
 
 
-function render() {
+/* ==========================================
+   ELEMENTS
+========================================== */
 
-  const total = Math.ceil(photoFiles.length / perPage);
+const gallery =
+    document.getElementById("gallery");
 
-  if (page > total) {
-    page = total || 1;
-  }
+const pagination =
+    document.getElementById("pagination");
 
-  gallery.innerHTML = '';
+const lightbox =
+    document.getElementById("lightbox");
 
-  const start = (page - 1) * perPage;
+const lightboxImage =
+    document.getElementById("lightboxImage");
 
-  photoFiles
-    .slice(start, start + perPage)
-    .forEach((src, i) => {
+const closeBtn =
+    document.getElementById("closeBtn");
 
-      const n = start + i + 1;
+const prevBtn =
+    document.getElementById("prevBtn");
 
-      const div = document.createElement('div');
+const nextBtn =
+    document.getElementById("nextBtn");
 
-      div.className = 'photo';
+const downloadBtn =
+    document.getElementById("downloadBtn");
 
-      div.innerHTML = `
-        <img
-          src="${src}"
-          alt="Engagement photo ${n}"
-          loading="lazy"
-        >
-        <span class="photo-number">${n}</span>
-      `;
 
-      div.onclick = () => openBox(n - 1);
+/* ==========================================
+   CURRENT LIGHTBOX PHOTO
+========================================== */
 
-      gallery.appendChild(div);
+let currentPhotoIndex = 0;
+
+
+/* ==========================================
+   RENDER GALLERY
+========================================== */
+
+function renderGallery(){
+
+    gallery.innerHTML = "";
+
+    const start =
+        (currentPage - 1) * perPage;
+
+    const end =
+        Math.min(
+            start + perPage,
+            photoFiles.length
+        );
+
+    for(let i = start; i < end; i++){
+
+        const card =
+            document.createElement("div");
+
+        card.className = "photo-card";
+
+        const img =
+            document.createElement("img");
+
+        img.src = photoFiles[i];
+
+        /* No serial number */
+        img.alt = "Engagement photo";
+
+        img.loading = "lazy";
+
+        card.appendChild(img);
+
+        card.addEventListener("click", () => {
+
+            openLightbox(i);
+
+        });
+
+        gallery.appendChild(card);
+    }
+}
+
+
+/* ==========================================
+   PAGINATION
+========================================== */
+
+function renderPagination(){
+
+    pagination.innerHTML = "";
+
+    /* PREVIOUS */
+
+    const previous =
+        document.createElement("button");
+
+    previous.className = "prev-next";
+
+    previous.textContent = "Previous";
+
+    previous.disabled =
+        currentPage === 1;
+
+    previous.addEventListener("click", () => {
+
+        if(currentPage > 1){
+
+            currentPage--;
+
+            render();
+
+            window.scrollTo({
+                top:0,
+                behavior:"smooth"
+            });
+        }
 
     });
 
+    pagination.appendChild(previous);
 
-  /* =========================================================
-     PAGINATION
-     ========================================================= */
 
-  pagination.innerHTML = '';
+    /* ======================================
+       ONLY 3 PAGE NUMBERS AT A TIME
+    ====================================== */
 
-  const prev = document.createElement('button');
+    let startPage;
+    let endPage;
 
-  prev.textContent = '‹';
+    if(totalPages <= 3){
 
-  prev.disabled = page === 1;
+        startPage = 1;
+        endPage = totalPages;
 
-  prev.onclick = () => {
+    }
+    else if(currentPage === 1){
 
-    page--;
+        startPage = 1;
+        endPage = 3;
 
-    render();
+    }
+    else if(currentPage === totalPages){
 
-    scrollTo({
-      top: gallery.offsetTop - 90,
-      behavior: 'smooth'
+        startPage = totalPages - 2;
+        endPage = totalPages;
+
+    }
+    else{
+
+        startPage = currentPage - 1;
+        endPage = currentPage + 1;
+
+    }
+
+
+    /* ======================================
+       FIRST PAGE WHEN WINDOW IS NOT AT START
+    ====================================== */
+
+    if(startPage > 1){
+
+        const first =
+            document.createElement("button");
+
+        first.className = "page-btn";
+
+        first.textContent = "1";
+
+        first.addEventListener("click", () => {
+
+            currentPage = 1;
+
+            render();
+
+            window.scrollTo({
+                top:0,
+                behavior:"smooth"
+            });
+
+        });
+
+        pagination.appendChild(first);
+
+        if(startPage > 2){
+
+            const dots =
+                document.createElement("span");
+
+            dots.className = "ellipsis";
+
+            dots.textContent = "…";
+
+            pagination.appendChild(dots);
+
+        }
+
+    }
+
+
+    /* ======================================
+       PAGE NUMBERS
+    ====================================== */
+
+    for(
+        let page = startPage;
+        page <= endPage;
+        page++
+    ){
+
+        const button =
+            document.createElement("button");
+
+        button.className = "page-btn";
+
+        button.textContent = page;
+
+        if(page === currentPage){
+
+            button.classList.add("active");
+
+        }
+
+        button.addEventListener("click", () => {
+
+            currentPage = page;
+
+            render();
+
+            window.scrollTo({
+                top:0,
+                behavior:"smooth"
+            });
+
+        });
+
+        pagination.appendChild(button);
+
+    }
+
+
+    /* ======================================
+       LAST PAGE
+    ====================================== */
+
+    if(endPage < totalPages){
+
+        if(endPage < totalPages - 1){
+
+            const dots =
+                document.createElement("span");
+
+            dots.className = "ellipsis";
+
+            dots.textContent = "…";
+
+            pagination.appendChild(dots);
+
+        }
+
+        const last =
+            document.createElement("button");
+
+        last.className = "page-btn";
+
+        last.textContent = totalPages;
+
+        last.addEventListener("click", () => {
+
+            currentPage = totalPages;
+
+            render();
+
+            window.scrollTo({
+                top:0,
+                behavior:"smooth"
+            });
+
+        });
+
+        pagination.appendChild(last);
+
+    }
+
+
+    /* ======================================
+       NEXT
+    ====================================== */
+
+    const next =
+        document.createElement("button");
+
+    next.className = "prev-next";
+
+    next.textContent = "Next";
+
+    next.disabled =
+        currentPage === totalPages;
+
+    next.addEventListener("click", () => {
+
+        if(currentPage < totalPages){
+
+            currentPage++;
+
+            render();
+
+            window.scrollTo({
+                top:0,
+                behavior:"smooth"
+            });
+
+        }
+
     });
 
-  };
-
-  pagination.appendChild(prev);
-
-
-  for (let i = 1; i <= total; i++) {
-
-    const b = document.createElement('button');
-
-    b.textContent = i;
-
-    b.className = i === page ? 'active' : '';
-
-    b.onclick = () => {
-
-      page = i;
-
-      render();
-
-      scrollTo({
-        top: gallery.offsetTop - 90,
-        behavior: 'smooth'
-      });
-
-    };
-
-    pagination.appendChild(b);
-
-  }
-
-
-  const next = document.createElement('button');
-
-  next.textContent = '›';
-
-  next.disabled = page === total;
-
-  next.onclick = () => {
-
-    page++;
-
-    render();
-
-    scrollTo({
-      top: gallery.offsetTop - 90,
-      behavior: 'smooth'
-    });
-
-  };
-
-  pagination.appendChild(next);
+    pagination.appendChild(next);
 
 }
 
 
-/* =========================================================
-   FULL SCREEN PHOTO
-   ========================================================= */
+/* ==========================================
+   RENDER EVERYTHING
+========================================== */
 
-function openBox(i) {
+function render(){
 
-  current =
-    (i + photoFiles.length) %
-    photoFiles.length;
+    renderGallery();
 
-  lbImage.src =
-    photoFiles[current];
-
-  lbImage.alt =
-    'Engagement photo ' + (current + 1);
-
-  download.href =
-    photoFiles[current];
-
-  download.download =
-    photoFiles[current]
-      .split('/')
-      .pop();
-
-  lightbox.classList.add('open');
-
-  lightbox.setAttribute(
-    'aria-hidden',
-    'false'
-  );
-
-  document.body.style.overflow =
-    'hidden';
+    renderPagination();
 
 }
 
 
-function closeBox() {
+/* ==========================================
+   OPEN LIGHTBOX
+========================================== */
 
-  lightbox.classList.remove('open');
+function openLightbox(index){
 
-  lightbox.setAttribute(
-    'aria-hidden',
-    'true'
-  );
+    currentPhotoIndex = index;
 
-  document.body.style.overflow =
-    '';
+    lightboxImage.src =
+        photoFiles[currentPhotoIndex];
+
+    downloadBtn.href =
+        photoFiles[currentPhotoIndex];
+
+    lightbox.classList.add("show");
+
+    document.body.style.overflow = "hidden";
 
 }
 
 
-/* =========================================================
-   BUTTONS
-   ========================================================= */
+/* ==========================================
+   CLOSE LIGHTBOX
+========================================== */
 
-document.getElementById('close').onclick =
-  closeBox;
+function closeLightbox(){
 
+    lightbox.classList.remove("show");
 
-document.getElementById('prev').onclick =
-  () => openBox(current - 1);
+    document.body.style.overflow = "";
 
-
-document.getElementById('next').onclick =
-  () => openBox(current + 1);
+}
 
 
-lightbox.onclick = e => {
+/* ==========================================
+   NEXT PHOTO
+========================================== */
 
-  if (e.target === lightbox) {
-    closeBox();
-  }
+function showNextPhoto(){
 
-};
+    currentPhotoIndex++;
 
+    if(
+        currentPhotoIndex >=
+        photoFiles.length
+    ){
 
-/* =========================================================
-   KEYBOARD
-   ========================================================= */
+        currentPhotoIndex = 0;
 
-document.addEventListener('keydown', e => {
+    }
 
-  if (!lightbox.classList.contains('open')) {
-    return;
-  }
+    lightboxImage.src =
+        photoFiles[currentPhotoIndex];
 
-  if (e.key === 'Escape') {
-    closeBox();
-  }
+    downloadBtn.href =
+        photoFiles[currentPhotoIndex];
 
-  if (e.key === 'ArrowLeft') {
-    openBox(current - 1);
-  }
-
-  if (e.key === 'ArrowRight') {
-    openBox(current + 1);
-  }
-
-});
+}
 
 
-/* =========================================================
-   MOBILE MENU
-   ========================================================= */
+/* ==========================================
+   PREVIOUS PHOTO
+========================================== */
 
-const menu =
-  document.getElementById('menu');
+function showPreviousPhoto(){
 
-const nav =
-  document.getElementById('nav');
+    currentPhotoIndex--;
+
+    if(currentPhotoIndex < 0){
+
+        currentPhotoIndex =
+            photoFiles.length - 1;
+
+    }
+
+    lightboxImage.src =
+        photoFiles[currentPhotoIndex];
+
+    downloadBtn.href =
+        photoFiles[currentPhotoIndex];
+
+}
 
 
-menu.onclick = () =>
-  nav.classList.toggle('open');
+/* ==========================================
+   BUTTON EVENTS
+========================================== */
+
+closeBtn.addEventListener(
+    "click",
+    closeLightbox
+);
+
+nextBtn.addEventListener(
+    "click",
+    showNextPhoto
+);
+
+prevBtn.addEventListener(
+    "click",
+    showPreviousPhoto
+);
 
 
-document
-  .querySelectorAll('.nav-links a')
-  .forEach(a =>
-    a.onclick = () =>
-      nav.classList.remove('open')
-  );
+/* ==========================================
+   CLICK OUTSIDE IMAGE
+========================================== */
+
+lightbox.addEventListener(
+    "click",
+    (event) => {
+
+        if(event.target === lightbox){
+
+            closeLightbox();
+
+        }
+
+    }
+);
 
 
-/* =========================================================
+/* ==========================================
+   KEYBOARD CONTROLS
+========================================== */
+
+document.addEventListener(
+    "keydown",
+    (event) => {
+
+        if(!lightbox.classList.contains("show")){
+
+            return;
+
+        }
+
+        if(event.key === "Escape"){
+
+            closeLightbox();
+
+        }
+
+        if(event.key === "ArrowRight"){
+
+            showNextPhoto();
+
+        }
+
+        if(event.key === "ArrowLeft"){
+
+            showPreviousPhoto();
+
+        }
+
+    }
+);
+
+
+/* ==========================================
    START
-   ========================================================= */
+========================================== */
 
 render();
 
