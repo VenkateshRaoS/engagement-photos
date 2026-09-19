@@ -425,6 +425,161 @@ footer p{
 }
 
 </style>
+
+<style>
+/* =========================
+   WEDDING ASSISTANT
+   Added without changing the existing design
+========================= */
+.wedding-chat-toggle{
+  position:fixed !important;
+  right:24px !important;
+  bottom:24px !important;
+  z-index:5000;
+  width:62px;
+  height:62px;
+  border:0;
+  border-radius:50%;
+  background:#741d34;
+  color:#fff;
+  font-size:26px;
+  cursor:pointer;
+  box-shadow:0 12px 32px rgba(50,10,25,.30);
+  transition:.25s ease;
+}
+.wedding-chat-toggle:hover{transform:translateY(-3px);box-shadow:0 16px 38px rgba(50,10,25,.36)}
+.wedding-chat-panel{
+  position:fixed !important;
+  right:24px !important;
+  bottom:98px !important;
+  z-index:4999;
+  width:380px;
+  max-width:calc(100vw - 30px);
+  height:570px;
+  display:none;
+  flex-direction:column;
+  overflow:hidden;
+  background:#fff;
+  border:1px solid rgba(116,29,52,.12);
+  border-radius:22px;
+  box-shadow:0 24px 70px rgba(45,10,25,.25);
+}
+.wedding-chat-panel.open{display:flex}
+.wedding-chat-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px 18px;
+  background:#741d34;
+  color:#fff;
+}
+.wedding-chat-head strong{font-family:"Cormorant Garamond",Georgia,serif;font-size:21px}
+.wedding-chat-head small{display:block;font:11px Inter,system-ui,sans-serif;opacity:.82;margin-top:2px}
+.wedding-chat-close{
+  border:0;background:transparent;color:#fff;font-size:25px;cursor:pointer;
+}
+.wedding-chat-body{
+  flex:1;
+  overflow-y:auto;
+  padding:14px;
+  background:#fffaf6;
+}
+.wedding-chat-msg{
+  max-width:88%;
+  margin:7px 0;
+  padding:10px 13px;
+  border-radius:15px;
+  font:14px/1.5 Inter,system-ui,sans-serif;
+  white-space:pre-wrap;
+}
+.wedding-chat-msg.bot{
+  background:#fff;
+  border:1px solid rgba(116,29,52,.10);
+  color:#3a2330;
+}
+.wedding-chat-msg.user{
+  margin-left:auto;
+  background:#741d34;
+  color:#fff;
+}
+.wedding-chat-photo-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;
+  margin-top:10px;
+}
+.wedding-chat-photo-card{
+  overflow:hidden;
+  border-radius:11px;
+  background:#f6edf0;
+  border:1px solid rgba(116,29,52,.08);
+}
+.wedding-chat-photo-card img{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  cursor:pointer;
+}
+.wedding-chat-photo-actions{
+  display:flex;
+  justify-content:center;
+  padding:6px;
+}
+.wedding-chat-photo-actions a{
+  color:#741d34;
+  font:600 11px Inter,system-ui,sans-serif;
+  text-decoration:none;
+}
+.wedding-chat-quick{
+  display:flex;
+  gap:6px;
+  overflow-x:auto;
+  padding:8px 10px;
+  background:#fff;
+  border-top:1px solid #eee;
+}
+.wedding-chat-quick button{
+  flex:0 0 auto;
+  border:1px solid #ead2dc;
+  background:#fff7f8;
+  color:#741d34;
+  border-radius:18px;
+  padding:7px 10px;
+  font:600 11px Inter,system-ui,sans-serif;
+  cursor:pointer;
+}
+.wedding-chat-input{
+  display:flex;
+  gap:8px;
+  padding:10px;
+  background:#fff;
+  border-top:1px solid #eee;
+}
+.wedding-chat-input input{
+  min-width:0;
+  flex:1;
+  border:1px solid #ddd;
+  border-radius:22px;
+  padding:10px 13px;
+  outline:none;
+  font:14px Inter,system-ui,sans-serif;
+}
+.wedding-chat-input button{
+  border:0;
+  background:#741d34;
+  color:#fff;
+  border-radius:22px;
+  padding:0 16px;
+  font:600 13px Inter,system-ui,sans-serif;
+  cursor:pointer;
+}
+@media(max-width:600px){
+  .wedding-chat-toggle{right:15px;bottom:15px;width:58px;height:58px}
+  .wedding-chat-panel{right:10px;bottom:84px;width:calc(100vw - 20px);height:70vh;border-radius:19px}
+}
+
+</style>
+
 </head>
 
 <body>
@@ -1077,6 +1232,356 @@ document.addEventListener(
 
 render();
 
+</script>
+
+
+<!-- =========================
+     WEDDING ASSISTANT
+========================= -->
+<button class="wedding-chat-toggle" id="weddingChatToggle" aria-label="Open Wedding Assistant">💬</button>
+
+<div class="wedding-chat-panel" id="weddingChatPanel" aria-label="Wedding Assistant">
+  <div class="wedding-chat-head">
+    <div>
+      <strong>Wedding Assistant 💍</strong>
+      <small>Lakshman ♥ Keerthana</small>
+    </div>
+    <button class="wedding-chat-close" id="weddingChatClose" aria-label="Close chat">×</button>
+  </div>
+
+  <div class="wedding-chat-body" id="weddingChatBody"></div>
+
+  <div class="wedding-chat-quick">
+    <button data-chat-question="Show me couple photos">Couple Photos</button>
+    <button data-chat-question="Show bride photos">Bride</button>
+    <button data-chat-question="Show groom photos">Groom</button>
+    <button data-chat-question="Show bride family photos">Bride Family</button>
+    <button data-chat-question="Show groom family photos">Groom Family</button>
+  </div>
+
+  <div class="wedding-chat-input">
+    <input id="weddingChatInput" type="text" placeholder="Ask about the couple or photos..." autocomplete="off">
+    <button id="weddingChatSend">Send</button>
+  </div>
+</div>
+
+
+<script>
+/* =========================================================
+   WEDDING ASSISTANT
+   Knowledge is intentionally based on the wedding details
+   supplied for this website.
+========================================================= */
+(function(){
+
+  const weddingAssistantData = {
+    groom: "Lakshman",
+    bride: "Keerthana",
+    couple: "Lakshman & Keerthana",
+    engagementDate: "September 6, 2026",
+    weddingDate: "December 5 & 6, 2026",
+
+    // Photo training / categories — exact image paths
+    couplePhotos: [
+      "images/024.jpg", "images/026.jpg",
+      "images/088.jpg", "images/090.jpg"
+    ],
+    bridePhotos: [
+      "images/285.jpg", "images/289.jpg"
+    ],
+    groomPhotos: [
+      "images/264.jpg", "images/268.jpg"
+    ],
+    brideFamilyPhotos: [
+      "images/149.jpg", "images/150.jpg"
+    ],
+    groomFamilyPhotos: [
+      "images/115.jpg", "images/175.jpg"
+    ]
+  };
+
+  const chatToggle = document.getElementById("weddingChatToggle");
+  const chatPanel = document.getElementById("weddingChatPanel");
+  const chatClose = document.getElementById("weddingChatClose");
+  const chatBody = document.getElementById("weddingChatBody");
+  const chatInput = document.getElementById("weddingChatInput");
+  const chatSend = document.getElementById("weddingChatSend");
+
+  if(!chatToggle || !chatPanel || !chatBody) return;
+
+  function normalize(text){
+    return text
+      .toLowerCase()
+      .replace(/[?!.,'"`]/g," ")
+      .replace(/\s+/g," ")
+      .trim();
+  }
+
+  function hasAny(text, words){
+    return words.some(word => text.includes(word));
+  }
+
+  function addTextMessage(text, type="bot"){
+    const message = document.createElement("div");
+    message.className = "wedding-chat-msg " + type;
+    message.textContent = text;
+    chatBody.appendChild(message);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  function photoPath(number){
+    // The training data can use the exact path, e.g. images/024.jpg.
+    // Keep compatibility with simple numbers too.
+    if(String(number).startsWith("images/")) return String(number);
+    return "images/" + String(number).padStart(3,"0") + ".jpg";
+  }
+
+  function showPhotos(title, numbers){
+    const message = document.createElement("div");
+    message.className = "wedding-chat-msg bot";
+
+    const titleElement = document.createElement("div");
+    titleElement.textContent = title;
+    message.appendChild(titleElement);
+
+    const grid = document.createElement("div");
+    grid.className = "wedding-chat-photo-grid";
+
+    numbers.forEach(number => {
+      const path = photoPath(number);
+
+      const card = document.createElement("div");
+      card.className = "wedding-chat-photo-card";
+
+      const image = document.createElement("img");
+      image.src = path;
+      image.alt = "Wedding photo";
+      image.loading = "lazy";
+      image.decoding = "async";
+
+      /* Show it inside the chatbot. Clicking opens the photo
+         using the existing page lightbox when available. */
+      image.addEventListener("click", function(){
+        if(typeof window.openLightbox === "function"){
+          const allPhotos = Array.from(
+            {length:314},
+            (_,i) => "images/" + String(i + 13).padStart(3,"0") + ".jpg"
+          );
+          const index = allPhotos.indexOf(path);
+          if(index !== -1) window.openLightbox(index);
+        } else if(typeof window.openBox === "function"){
+          const homePhotos = Array.from(
+            document.querySelectorAll(".gallery-grid .photo img")
+          ).map(img => img.getAttribute("src"));
+          const index = homePhotos.indexOf(path);
+          if(index !== -1) window.openBox(index);
+        }
+      });
+
+      const actions = document.createElement("div");
+      actions.className = "wedding-chat-photo-actions";
+
+      const download = document.createElement("a");
+      download.href = path;
+      download.download = "";
+      download.textContent = "Download";
+
+      actions.appendChild(download);
+      card.appendChild(image);
+      card.appendChild(actions);
+      grid.appendChild(card);
+    });
+
+    message.appendChild(grid);
+    chatBody.appendChild(message);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  function answerQuestion(question){
+    const q = normalize(question);
+
+    /* PHOTO REQUESTS FIRST */
+    if(
+      hasAny(q, ["couple photo","couple photos","couple picture","couple pictures",
+                 "photos of both","pictures of both","lakshman and keerthana photo",
+                 "lakshman keerthana photo","photos together","photo together",
+                 "show couple","send couple"])
+    ){
+      showPhotos(
+        "Here are Lakshman & Keerthana's couple photos ❤️",
+        weddingAssistantData.couplePhotos
+      );
+      return;
+    }
+
+    if(
+      hasAny(q, ["bride family photo","bride family photos","keerthana family photo",
+                 "keerthana family photos","photos of bride family","bride family pictures"])
+    ){
+      showPhotos(
+        "Here are the bride family photos ❤️",
+        weddingAssistantData.brideFamilyPhotos
+      );
+      return;
+    }
+
+    if(
+      hasAny(q, ["groom family photo","groom family photos","lakshman family photo",
+                 "lakshman family photos","photos of groom family","groom family pictures"])
+    ){
+      showPhotos(
+        "Here are the groom family photos ❤️",
+        weddingAssistantData.groomFamilyPhotos
+      );
+      return;
+    }
+
+    if(
+      hasAny(q, ["bride photo","bride photos","bride picture","bride pictures",
+                 "keerthana photo","keerthana photos","photos of bride","photo of bride"])
+    ){
+      showPhotos(
+        "Here are Keerthana's photos ❤️",
+        weddingAssistantData.bridePhotos
+      );
+      return;
+    }
+
+    if(
+      hasAny(q, ["groom photo","groom photos","groom picture","groom pictures",
+                 "lakshman photo","lakshman photos","photos of groom","photo of groom"])
+    ){
+      showPhotos(
+        "Here are Lakshman's photos ❤️",
+        weddingAssistantData.groomPhotos
+      );
+      return;
+    }
+
+    /* PEOPLE */
+    if(
+      hasAny(q, ["who is the bride","who is bride","bride name","name of bride",
+                 "bride's name","brides name","girl getting married","who is getting married girl"]) ||
+      (q === "bride") ||
+      (q.includes("bride") && !hasAny(q,["photo","picture","family"]))
+    ){
+      addTextMessage("The bride is Keerthana. ❤️");
+      return;
+    }
+
+    if(
+      hasAny(q, ["who is the groom","who is groom","groom name","name of groom",
+                 "groom's name","grooms name","boy getting married"]) ||
+      (q === "groom") ||
+      (q.includes("groom") && !hasAny(q,["photo","picture","family"]))
+    ){
+      addTextMessage("The groom is Lakshman. 🤵");
+      return;
+    }
+
+    if(
+      hasAny(q, ["couple name","couples name","who are getting married",
+                 "names of the couple","their names","what are their names",
+                 "who is the couple"]) ||
+      (q === "couple")
+    ){
+      addTextMessage("The couple is Lakshman & Keerthana. 💕");
+      return;
+    }
+
+    /* DATES */
+    if(
+      hasAny(q, ["engagement date","when was the engagement","when is the engagement",
+                 "engagement day","engagement happened","engaged on","date of engagement"])
+    ){
+      addTextMessage("The engagement was on September 6, 2026. 💍");
+      return;
+    }
+
+    if(
+      hasAny(q, ["wedding date","when is the wedding","when is marriage",
+                 "marriage date","wedding day","date of wedding","date of marriage"])
+    ){
+      addTextMessage("The wedding is on December 5 & 6, 2026. 📅");
+      return;
+    }
+
+    /* GENERAL HELP */
+    if(hasAny(q, ["hello","hi","hey","namaste","good morning","good evening"])){
+      addTextMessage("Hello! 👋 I’m the Lakshman & Keerthana Wedding Assistant. Ask me about the couple, dates, or specific photo groups.");
+      return;
+    }
+
+    if(hasAny(q, ["help","what can you do","what can i ask","commands"])){
+      addTextMessage(
+        "You can ask me:\n" +
+        "• Who is the bride?\n" +
+        "• Who is the groom?\n" +
+        "• What is the couple name?\n" +
+        "• When was the engagement?\n" +
+        "• When is the wedding?\n" +
+        "• Show me couple photos\n" +
+        "• Show bride/groom photos\n" +
+        "• Show bride family photos\n" +
+        "• Show groom family photos"
+      );
+      return;
+    }
+
+    if(hasAny(q, ["download","how to download","save photo"])){
+      addTextMessage("To download a photo, ask me for the photo group and then tap the Download button under the photo.");
+      return;
+    }
+
+    if(hasAny(q, ["photo","photos","picture","pictures","gallery","images"])){
+      addTextMessage("I can show specific photos directly here. Try “Show me couple photos”, “Show bride photos”, or “Show groom photos”. 📸");
+      return;
+    }
+
+    addTextMessage("I can help with Lakshman & Keerthana's names, engagement date, wedding date, and their photo groups. Try “Who is the bride?” or “Show me couple photos”.");
+  }
+
+  function sendQuestion(){
+    const value = chatInput.value.trim();
+    if(!value) return;
+
+    addTextMessage(value,"user");
+    chatInput.value = "";
+
+    setTimeout(function(){
+      answerQuestion(value);
+    },120);
+  }
+
+  chatToggle.addEventListener("click",function(){
+    chatPanel.classList.toggle("open");
+
+    if(chatPanel.classList.contains("open") && chatBody.children.length === 0){
+      addTextMessage("Hi! 👋 I’m your Wedding Assistant.\nAsk me about Lakshman & Keerthana, the engagement/wedding dates, or ask me to show specific photos directly here.");
+    }
+  });
+
+  chatClose.addEventListener("click",function(){
+    chatPanel.classList.remove("open");
+  });
+
+  chatSend.addEventListener("click",sendQuestion);
+
+  chatInput.addEventListener("keydown",function(event){
+    if(event.key === "Enter") sendQuestion();
+  });
+
+  document.querySelectorAll("[data-chat-question]").forEach(function(button){
+    button.addEventListener("click",function(){
+      const question = button.getAttribute("data-chat-question");
+      addTextMessage(question,"user");
+      setTimeout(function(){
+        answerQuestion(question);
+      },120);
+    });
+  });
+
+})();
 </script>
 
 </body>
